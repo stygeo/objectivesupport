@@ -7,6 +7,7 @@
 //
 
 #import "NSString+InflectionSupport.h"
+#import "ObjectiveResourceConfig.h"
 
 @implementation NSString (InflectionSupport)
 
@@ -87,8 +88,12 @@
 
 - (NSString *)toClassName {
 	NSString *result = [self camelize];
-	return [result stringByReplacingCharactersInRange:NSMakeRange(0,1) 
-										 withString:[[result substringWithRange:NSMakeRange(0,1)] uppercaseString]];
+	result = [result stringByReplacingCharactersInRange:NSMakeRange(0,1) 
+	withString:[[result substringWithRange:NSMakeRange(0,1)] uppercaseString]];
+	if ([ObjectiveResourceConfig getLocalClassesPrefix]!=nil) {
+		result = [[ObjectiveResourceConfig getLocalClassesPrefix] stringByAppendingString:result];
+	}
+	return result;
 }
 
 @end
