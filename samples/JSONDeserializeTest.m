@@ -7,9 +7,8 @@
 //
 
 #import "JSONDeserializeTest.h"
-#import "NSObject+JSONSerializableSupport.h"
+#import "ObjectiveSupport/ObjectiveSupport.h"
 #import "TestClass.h"
-#import "ObjectiveResourceDateFormatter.h"
 
 @implementation JSONDeserializeTest
 

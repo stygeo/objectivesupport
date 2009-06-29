@@ -7,9 +7,8 @@
 //
 
 #import "XMLDeserializeTest.h"
-#import "NSObject+XMLSerializableSupport.h"
+#import "ObjectiveSupport/ObjectiveSupport.h"
 #import "TestClass.h"
-#import "ObjectiveResourceDateFormatter.h"
 #import "TestClassMiddle.h"
 #import "TestClassTop.h"
 

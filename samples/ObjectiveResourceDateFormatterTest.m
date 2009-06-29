@@ -7,7 +7,7 @@
 //
 
 #import "ObjectiveResourceDateFormatterTest.h"
-#import "ObjectiveResourceDateFormatter.h"
+#import "ObjectiveSupport/ObjectiveSupport.h"
 
 @implementation ObjectiveResourceDateFormatterTest
 

@@ -9,9 +9,38 @@ its own.
 
 h2. Installation
 
-# Download (clone) the objectivesupport project
-# open the .xcodeproj in XCode for both objectivesuppoe and your iPhone project
-# drag the ObjectiveSupport group from the objectivesupport project onto your iPhone project, making sure to check the "copy files" box.
+Adding Objective Support to your project
+==============================
+
+Objective Support is compiled as a static library, and the easiest way to add it to your project is to use Xcode's "dependent project" facilities.  Here is how:
+
+1. Clone the Objective Support git repository: `git clone git://github.com/lgalabru/objectivesupport.git`. Make sure 
+   you store the repository in a permanent place because Xcode will need to reference the files
+   every time you compile your project.
+
+2. Locate the "ObjectiveSupport.xcodeproj" file under "objectivesupport/src".  Drag ObjectiveSupport.xcodeproj and drop it onto
+   the root of your Xcode project's "Groups and Files"  sidebar.  A dialog will appear -- make sure 
+   "Copy items" is unchecked and "Reference Type" is "Relative to Project" before clicking "Add".
+
+3. Now you need to link the ObjectiveSupport static library to your project.  Click the "ObjectiveSupport.xcodeproj" 
+   item that has just been added to the sidebar.  Under the "Details" table, you will see a single
+   item: libObjectiveSupport.a.  Check the checkbox on the far right of libObjectiveSupport.a.
+
+4. Now you need to add ObjectiveSupport as a dependency of your project, so Xcode compiles it whenever
+   you compile your project.  Expand the "Targets" section of the sidebar and double-click your
+   application's target.  Under the "General" tab you will see a "Direct Dependencies" section. 
+   Click the "+" button, select "ObjectiveSupport", and click "Add Target".
+
+5. Finally, we need to tell your project where to find the ObjectiveSupport headers.  Open your
+   "Project Settings" and go to the "Build" tab. Look for "Header Search Paths" and double-click
+   it.  Add the relative path from your project's directory to the "objectivesupport/src" directory.
+
+6. While you are in Project Settings, go to "Other Linker Flags" under the "Linker" section, and
+   add "-ObjC" and "-all_load" to the list of flags.
+
+7. You're ready to go.  Just #import "ObjectiveSupport/ObjectiveSupport.h" anywhere you want to use ObjectiveSupport classes
+   in your project.
+
 
 h2. Testing
 

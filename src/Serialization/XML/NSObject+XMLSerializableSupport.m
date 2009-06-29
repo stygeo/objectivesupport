@@ -64,11 +64,12 @@
 }
 
 + (NSString *)xmlElementName {
-	NSString *className = NSStringFromClass(self);
-		if ([self getLocalClassesPrefix] != nil) {
-			className = [className substringFromIndex:[[self getLocalClassesPrefix] length]];
-		}
-		return [[className stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:[[className substringToIndex:1] lowercaseString]] dasherize];
+	NSString * className = NSStringFromClass(self);
+	NSString * prefix = [NSClassFromString(@"ObjectiveResourceConfig") getLocalClassesPrefix];
+	if (prefix != nil) {
+		className = [className substringFromIndex:[prefix length]];
+	}
+	return [[className stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:[[className substringToIndex:1] lowercaseString]] dasherize];
 }
 
 # pragma mark XMLSerializable implementation methods
