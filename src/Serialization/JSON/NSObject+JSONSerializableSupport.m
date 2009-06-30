@@ -143,7 +143,7 @@
 
 - (NSString *)jsonClassName {
 	NSString * className = NSStringFromClass([self class]);
-	NSString * prefix = [NSClassFromString(@"ObjectiveResourceConfig") getLocalClassesPrefix];
+	NSString * prefix = [[NSClassFromString(@"ORConfigurationManager") defaultManager] localPrefix];
 
 	if (prefix != nil) {
 		className = [className substringFromIndex:[prefix length]];

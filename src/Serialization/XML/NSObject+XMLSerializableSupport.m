@@ -65,7 +65,7 @@
 
 + (NSString *)xmlElementName {
 	NSString * className = NSStringFromClass(self);
-	NSString * prefix = [NSClassFromString(@"ObjectiveResourceConfig") getLocalClassesPrefix];
+	NSString * prefix = [[NSClassFromString(@"ORConfigurationManager") defaultManager] localPrefix];
 	if (prefix != nil) {
 		className = [className substringFromIndex:[prefix length]];
 	}

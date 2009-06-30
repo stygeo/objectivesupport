@@ -89,7 +89,7 @@
 	NSString *result = [self camelize];
 	result = [result stringByReplacingCharactersInRange:NSMakeRange(0,1) 
 	withString:[[result substringWithRange:NSMakeRange(0,1)] uppercaseString]];
-	NSString * prefix = [NSClassFromString(@"ObjectiveResourceConfig") getLocalClassesPrefix];
+	NSString * prefix = [[NSClassFromString(@"ORConfigurationManager") defaultManager] localPrefix];
 	
 	if (prefix!=nil) {
 		result = [prefix stringByAppendingString:result];
