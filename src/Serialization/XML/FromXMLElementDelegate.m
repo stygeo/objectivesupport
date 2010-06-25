@@ -149,18 +149,22 @@
 		 forKey:[self.currentPropertyName camelize]];
 	}
 	else if ([self.currentPropertyName isEqualToString:[self convertElementName:elementName]]) {
-		//element is closed, pop it from the stack
-		[self.unclosedProperties removeLastObject];
-		//check for a parent object on the stack
-		if ([self.unclosedProperties count] > 0) {
-			//handle arrays as a special case
-			if ([[[self.unclosedProperties lastObject] objectAtIndex:1] isKindOfClass:[NSArray class]]) {
-				[[[self.unclosedProperties lastObject] objectAtIndex:1] addObject:self.parsedObject];
-			}
-			else {
-				[[[self.unclosedProperties lastObject] objectAtIndex:1] setValue:self.parsedObject forKey:[self convertElementName:[elementName camelize]]];
-			}
-			self.parsedObject = [[self.unclosedProperties lastObject] objectAtIndex:1];
+		@try {
+			//element is closed, pop it from the stack
+			[self.unclosedProperties removeLastObject];
+			//check for a parent object on the stack
+			if ([self.unclosedProperties count] > 0) {
+				//handle arrays as a special case
+				if ([[[self.unclosedProperties lastObject] objectAtIndex:1] isKindOfClass:[NSArray class]]) {
+					[[[self.unclosedProperties lastObject] objectAtIndex:1] addObject:self.parsedObject];
+				}
+				else {
+					[[[self.unclosedProperties lastObject] objectAtIndex:1] setValue:self.parsedObject forKey:[self convertElementName:[elementName camelize]]];
+				}
+				self.parsedObject = [[self.unclosedProperties lastObject] objectAtIndex:1];
+			} 
+		} @catch (NSException *e) {
+			
 		}
 	}
 	
