@@ -39,17 +39,8 @@
 			objc_property_t * prop = propList + i;
 			NSString *type = [NSString stringWithCString:property_getAttributes(*prop) encoding:NSUTF8StringEncoding];
 			propName = [NSString stringWithCString:property_getName(*prop) encoding:NSUTF8StringEncoding];
-//			if (![propName isEqualToString:@"_mapkit_hasPanoramaID"] && 
-//				![propName isEqualToString:@"URLValue"] &&
-//				![propName isEqualToString:@"accessibilityLanguage"] &&
-//				![propName isEqualToString:@"accessibilityFrame"] &&
-//				![propName isEqualToString:@"accessibilityTraits"] &&
-//				![propName isEqualToString:@"accessibilityHint"] &&
-//				![propName isEqualToString:@"accessibilityValue"] &&
-//				![propName isEqualToString:@"accessibilityLabel"] &&
-//				![propName isEqualToString:@"isAccessibilityElement"]) {
-//				[propertyNames setObject:[self getPropertyType:type] forKey:propName];
-//			}
+
+			// Get the property type and check whether this is an Object or not. Only 'objects' get serialized.
 			NSString *propertyType = [self getPropertyType:type];
 			if(nil != propertyType) {
 				[propertyNames setObject:propertyType forKey:propName];
@@ -74,16 +65,10 @@
 }
 
 + (NSString *) getPropertyType:(NSString *)attributeString {
-	//NSString *type = [NSString string];
 	NSString *type = nil;
 	NSScanner *typeScanner = [NSScanner scannerWithString:attributeString];
 	[typeScanner scanUpToCharactersFromSet:[NSCharacterSet characterSetWithCharactersInString:@"@"] intoString:NULL];
-	
-//	// we are not dealing with an object
-//	if([typeScanner isAtEnd]) {
-//		return @"NULL";
-//	}
-	
+		
 	if(![typeScanner isAtEnd]) {
 		// We didn't hit the end, so we have an object type
 		[typeScanner scanCharactersFromSet:[NSCharacterSet characterSetWithCharactersInString:@"\"@"] intoString:NULL];
